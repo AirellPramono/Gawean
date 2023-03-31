@@ -26,6 +26,22 @@ func GetAllClients(c *gin.Context) {
 	}
 	c.JSON(http.StatusOK, result)
 }
+func GetClient(c *gin.Context) {
+	var result gin.H
+
+	err, x := repository.GetClient(database.DbConnection, c)
+
+	if err != nil {
+		result = gin.H{
+			"result": err,
+		}
+	} else {
+		result = gin.H{
+			"result": x,
+		}
+	}
+	c.JSON(http.StatusOK, result)
+}
 func InsertClient(c *gin.Context) {
 	var x structs.Client
 
@@ -74,6 +90,25 @@ func DeleteClient(c *gin.Context) {
 	x.ID = id
 
 	err := repository.DeleteClient(database.DbConnection, x)
+
+	if err != nil {
+		panic(err)
+	}
+
+	c.JSON(http.StatusOK, gin.H{
+		"result": "Success Delete Client",
+	})
+}
+
+func DeleteClientSpecific(c *gin.Context) {
+	var x structs.Client
+	id := c.Param("id")
+	name := c.Param("name")
+
+	x.ID = id
+	x.Name = name
+
+	err := repository.DeleteClientSpecific(database.DbConnection, x)
 
 	if err != nil {
 		panic(err)
