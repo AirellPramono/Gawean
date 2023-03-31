@@ -11,35 +11,54 @@ ROUTES
 /clients 
 
 GET /= Get all clients data
+
 GET /:id = Get specific client by ID
+
 GET /city/:id = Get specific client by which city he lives
+
 POST /= Basic posting of 1 client data using JSON format
+
 PUT /:id = Update client data by ID
+
 DELETE /:id = Delete client data by ID
+
 DELETE /:id/:name = Delete client data by ID and also it’s name
+
 
 /address 
 
 GET / = Get all address data
+
 GET /:id = Get address specifically by ID
+
 POST / = Basic posting of 1 address data using JSON format
+
 PUT /:id = Update address by ID
+
 DELETE /:id = Delete address data by ID
 
 /category 
 
 GET / = Get all category data
+
 POST / = Basic posting of 1 category data using JSON format
+
 PUT /:id = Update category by ID
+
 DELETE /:id = Delete category data by ID
 
 /gawean 
 
 GET / = Get all gawean data
+
 GET /client/:id = Get gawean data by specific client
+
 GET /category/:id = Get gawean data by their category
+
 POST / = Basic posting of 1 gawean data using JSON format
+
 PUT /:id = Update gawean by ID
+
 DELETE /:id = Delete gawean data by ID
 
 /data
