@@ -46,6 +46,24 @@ func GetClient(db *sql.DB, c *gin.Context) (err error, results []structs.Client)
 
 }
 
+func GetClientByCity(db *sql.DB, c *gin.Context) (err error, results []structs.Client) {
+	sql := `SELECT *FROM client WHERE City = $1`
+	rows, err := db.Query(sql, c.Param("id"))
+	CheckErr(err)
+	defer rows.Close()
+
+	for rows.Next() {
+		var b = structs.Client{}
+
+		err = rows.Scan(&b.ID, &b.Name, &b.Description, &b.CreateDate, &b.UpdateDate, &b.City, &b.Province, &b.AddressID)
+		CheckErr(err)
+		results = append(results, b)
+
+	}
+	return
+
+}
+
 func InsertClient(db *sql.DB, cl structs.Client) (er error) {
 	sql := `INSERT INTO client (ID, FullName, Descr, CreateDate, UpdateDate, City, Province, AddressID) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)`
 
@@ -54,10 +72,10 @@ func InsertClient(db *sql.DB, cl structs.Client) (er error) {
 	return errs.Err()
 }
 
-func UpdateClient(db *sql.DB, cl structs.Client) (er error) {
-	sql := `UPDATE client SET ID = $1, FullName = $2, Descr = $3, UpdateDate = $4, City = $5, Province = $6, AddressID = $7`
+func UpdateClient(db *sql.DB, cl structs.Client, c *gin.Context) (er error) {
+	sql := `UPDATE client SET ID = $1, FullName = $2, Descr = $3, UpdateDate = $4, City = $5, Province = $6, AddressID = $7 WHERE ID = $8`
 
-	errs := db.QueryRow(sql, cl.ID, cl.Name, cl.Description, time.Now(), cl.City, cl.Province, cl.AddressID)
+	errs := db.QueryRow(sql, cl.ID, cl.Name, cl.Description, time.Now(), cl.City, cl.Province, cl.AddressID, c.Param("id"))
 
 	return errs.Err()
 }

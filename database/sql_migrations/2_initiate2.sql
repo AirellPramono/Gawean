@@ -7,7 +7,8 @@ CREATE TABLE gawean (
 	ClientName  VARCHAR(256),
 	Descr       TEXT,
 	CreateDate  VARCHAR(100),
-	UpdateDate  VARCHAR(100)
+	UpdateDate  VARCHAR(100),
+	CategoryID  INT
 
 )
 

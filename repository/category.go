@@ -4,6 +4,8 @@ import (
 	. "Gawean/helper"
 	"Gawean/structs"
 	"database/sql"
+
+	"github.com/gin-gonic/gin"
 )
 
 func GetAllCategories(db *sql.DB) (err error, results []structs.Category) {
@@ -26,17 +28,17 @@ func GetAllCategories(db *sql.DB) (err error, results []structs.Category) {
 }
 
 func InsertCategory(db *sql.DB, ct structs.Category) (er error) {
-	sql := `INSERT INTO category (ID, Name) VALUES ($1, $2)`
+	sql := `INSERT INTO category (ID, Fullname) VALUES ($1, $2)`
 
 	errs := db.QueryRow(sql, ct.ID, ct.Name)
 
 	return errs.Err()
 }
 
-func UpdateCategory(db *sql.DB, ct structs.Category) (er error) {
-	sql := `UPDATE category SET ID = $1, Name = $2`
+func UpdateCategory(db *sql.DB, ct structs.Category, c *gin.Context) (er error) {
+	sql := `UPDATE category SET ID = $1, Fullname = $2 WHERE ID = $3`
 
-	errs := db.QueryRow(sql, ct.ID, ct.Name)
+	errs := db.QueryRow(sql, ct.ID, ct.Name, c.Param("id"))
 
 	return errs.Err()
 }

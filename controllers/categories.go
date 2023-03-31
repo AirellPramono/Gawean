@@ -48,14 +48,11 @@ func InsertCategory(c *gin.Context) {
 
 func UpdateCategory(c *gin.Context) {
 	var x structs.Category
-	id, _ := strconv.Atoi(c.Param("id"))
-
 	err := c.ShouldBindJSON(&x)
 	if err != nil {
 		panic(err)
 	}
-	x.ID = id
-	err = repository.UpdateCategory(database.DbConnection, x)
+	err = repository.UpdateCategory(database.DbConnection, x, c)
 
 	if err != nil {
 		panic(err)

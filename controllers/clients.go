@@ -42,6 +42,22 @@ func GetClient(c *gin.Context) {
 	}
 	c.JSON(http.StatusOK, result)
 }
+func GetClientByCity(c *gin.Context) {
+	var result gin.H
+
+	err, x := repository.GetClientByCity(database.DbConnection, c)
+
+	if err != nil {
+		result = gin.H{
+			"result": err,
+		}
+	} else {
+		result = gin.H{
+			"result": x,
+		}
+	}
+	c.JSON(http.StatusOK, result)
+}
 func InsertClient(c *gin.Context) {
 	var x structs.Client
 
@@ -65,14 +81,13 @@ func InsertClient(c *gin.Context) {
 
 func UpdateClient(c *gin.Context) {
 	var x structs.Client
-	id := c.Param("id")
 
 	err := c.ShouldBindJSON(&x)
 	if err != nil {
 		panic(err)
 	}
-	x.ID = id
-	err = repository.UpdateClient(database.DbConnection, x)
+
+	err = repository.UpdateClient(database.DbConnection, x, c)
 
 	if err != nil {
 		panic(err)

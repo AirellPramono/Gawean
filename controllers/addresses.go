@@ -26,6 +26,23 @@ func GetAllAddresses(c *gin.Context) {
 	c.JSON(http.StatusOK, result)
 }
 
+func GetAddress(c *gin.Context) {
+	var result gin.H
+
+	err, x := repository.GetAddress(database.DbConnection, c)
+
+	if err != nil {
+		result = gin.H{
+			"result": err,
+		}
+	} else {
+		result = gin.H{
+			"result": x,
+		}
+	}
+	c.JSON(http.StatusOK, result)
+}
+
 func InsertAddress(c *gin.Context) {
 	var x structs.Address
 
@@ -47,14 +64,11 @@ func InsertAddress(c *gin.Context) {
 
 func UpdateAddress(c *gin.Context) {
 	var x structs.Address
-	id := c.Param("id")
-
 	err := c.ShouldBindJSON(&x)
 	if err != nil {
 		panic(err)
 	}
-	x.ID = id
-	err = repository.UpdateAddress(database.DbConnection, x)
+	err = repository.UpdateAddress(database.DbConnection, x, c)
 
 	if err != nil {
 		panic(err)

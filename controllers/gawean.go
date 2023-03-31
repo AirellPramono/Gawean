@@ -28,6 +28,40 @@ func GetAllGawean(c *gin.Context) {
 	c.JSON(http.StatusOK, result)
 }
 
+func GetGaweanByClient(c *gin.Context) {
+	var result gin.H
+
+	err, x := repository.GetGaweanByClient(database.DbConnection, c)
+
+	if err != nil {
+		result = gin.H{
+			"result": err,
+		}
+	} else {
+		result = gin.H{
+			"result": x,
+		}
+	}
+	c.JSON(http.StatusOK, result)
+}
+
+func GetGaweanByCategory(c *gin.Context) {
+	var result gin.H
+
+	err, x := repository.GetGaweanByCategory(database.DbConnection, c)
+
+	if err != nil {
+		result = gin.H{
+			"result": err,
+		}
+	} else {
+		result = gin.H{
+			"result": x,
+		}
+	}
+	c.JSON(http.StatusOK, result)
+}
+
 func InsertGawean(c *gin.Context) {
 	var x structs.Gawean
 
@@ -52,14 +86,11 @@ func InsertGawean(c *gin.Context) {
 
 func UpdateGawean(c *gin.Context) {
 	var x structs.Gawean
-	id, _ := strconv.Atoi(c.Param("id"))
-
 	err := c.ShouldBindJSON(&x)
 	if err != nil {
 		panic(err)
 	}
-	x.ID = id
-	err = repository.UpdateGawean(database.DbConnection, x)
+	err = repository.UpdateGawean(database.DbConnection, x, c)
 
 	if err != nil {
 		panic(err)
