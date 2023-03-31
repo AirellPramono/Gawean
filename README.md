@@ -6,9 +6,12 @@ Tentunya para penyedia jasa, contohnya dokter umum, tukang rawat taman, tukang s
 
 Gawean dapat membantu proses-proses ini, mendatakan informasi-informasi yang bejibun atau bertaburan, dan meningkatkan kinerja serta akurasi para penyedia servis tersebut. Gawean menyediakan cara untuk mendata detail klien, alamat klien terkait, kategori servis, dan gawean atau urusan yang terkait dengan klien tersebut.
 
+
 ROUTES
 
+
 /clients 
+
 
 GET /= Get all clients data
 
@@ -27,6 +30,7 @@ DELETE /:id/:name = Delete client data by ID and also it’s name
 
 /address 
 
+
 GET / = Get all address data
 
 GET /:id = Get address specifically by ID
@@ -37,7 +41,9 @@ PUT /:id = Update address by ID
 
 DELETE /:id = Delete address data by ID
 
+
 /category 
+
 
 GET / = Get all category data
 
@@ -47,7 +53,9 @@ PUT /:id = Update category by ID
 
 DELETE /:id = Delete category data by ID
 
+
 /gawean 
+
 
 GET / = Get all gawean data
 
@@ -61,13 +69,20 @@ PUT /:id = Update gawean by ID
 
 DELETE /:id = Delete gawean data by ID
 
+
 /data
 
+
 Super functionality
+
 Fill the URL parameter with d (days) in dd format, m (month) in mm format
+
 And y (year) in yyyy format
+
 And it will display the list of gaweans with next appointment on that particular date if exist
+
 Example 
+
 /data?d=01&m=04&y=2023 => Show gaweans with next appointment at 1st of April 2023
 
 So workers can use these functionality, especially the last one, to check on their dealings with the necessary clients
