@@ -1,1 +1,3 @@
 # Gawean
+
+Project yang berkonsep untuk memfalisitaskan para penyedia jasa dalam operasi atau gawean (kerjaan) mereka. Tentunya para penyedia jasa, contohnya dokter umum, tukang rawat taman, tukang servis AC, reparasi mesin-mesin secara berkala, sangat berhubungan dengan client mereka. Client mereka dapat berjumlah sangat banyak dalam rentang waktu yang singkat, dan juga masing-masing memiliki problematika atau masalah berbeda-beda. Gawean dapat membantu proses-proses ini, mendatakan informasi-informasi yang bejibun atau bertaburan, dan meningkatkan kinerja serta akurasi para penyedia servis tersebut.
