@@ -7,6 +7,9 @@ Tentunya para penyedia jasa, contohnya dokter umum, tukang rawat taman, tukang s
 Gawean dapat membantu proses-proses ini, mendatakan informasi-informasi yang bejibun atau bertaburan, dan meningkatkan kinerja serta akurasi para penyedia servis tersebut. Gawean menyediakan cara untuk mendata detail klien, alamat klien terkait, kategori servis, dan gawean atau urusan yang terkait dengan klien tersebut.
 
 
+Use BasicAuth with username Arif & password Bugaresa or username Saya & password Ganteng
+
+
 ROUTES
 
 
