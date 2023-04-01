@@ -28,6 +28,7 @@ func Authenticated(db *sql.DB, c *gin.Context) (auth bool) {
 		CheckErr(err)
 		if ok && un == x.Username && pw == x.Password {
 			auth = true
+			c.Request.SetBasicAuth(un, pw)
 			return
 		}
 
