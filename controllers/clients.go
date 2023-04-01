@@ -2,6 +2,7 @@ package controllers
 
 import (
 	"Gawean/database"
+	. "Gawean/helper"
 	"Gawean/repository"
 	"Gawean/structs"
 	"net/http"
@@ -62,14 +63,10 @@ func InsertClient(c *gin.Context) {
 	var x structs.Client
 
 	err := c.ShouldBindJSON(&x)
-	if err != nil {
-		panic(err)
-	}
+	CheckErr(err)
 
 	err = repository.InsertClient(database.DbConnection, x)
-	if err != nil {
-		panic(err)
-	}
+	CheckErr(err)
 	x.CreateDate = time.Time.String(time.Now())
 	x.UpdateDate = time.Time.String(time.Now())
 
@@ -83,15 +80,10 @@ func UpdateClient(c *gin.Context) {
 	var x structs.Client
 
 	err := c.ShouldBindJSON(&x)
-	if err != nil {
-		panic(err)
-	}
-
+	CheckErr(err)
 	err = repository.UpdateClient(database.DbConnection, x, c)
 
-	if err != nil {
-		panic(err)
-	}
+	CheckErr(err)
 
 	c.JSON(http.StatusOK, gin.H{
 		"result": "Success Update Client",
@@ -106,9 +98,7 @@ func DeleteClient(c *gin.Context) {
 
 	err := repository.DeleteClient(database.DbConnection, x)
 
-	if err != nil {
-		panic(err)
-	}
+	CheckErr(err)
 
 	c.JSON(http.StatusOK, gin.H{
 		"result": "Success Delete Client",
@@ -125,9 +115,7 @@ func DeleteClientSpecific(c *gin.Context) {
 
 	err := repository.DeleteClientSpecific(database.DbConnection, x)
 
-	if err != nil {
-		panic(err)
-	}
+	CheckErr(err)
 
 	c.JSON(http.StatusOK, gin.H{
 		"result": "Success Delete Client",

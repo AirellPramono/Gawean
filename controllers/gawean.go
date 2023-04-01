@@ -2,6 +2,7 @@ package controllers
 
 import (
 	"Gawean/database"
+	. "Gawean/helper"
 	"Gawean/repository"
 	"Gawean/structs"
 	"net/http"
@@ -66,14 +67,10 @@ func InsertGawean(c *gin.Context) {
 	var x structs.Gawean
 
 	err := c.ShouldBindJSON(&x)
-	if err != nil {
-		panic(err)
-	}
+	CheckErr(err)
 
 	err = repository.InsertGawean(database.DbConnection, x)
-	if err != nil {
-		panic(err)
-	}
+	CheckErr(err)
 
 	x.CreateDate = time.Time.String(time.Now())
 	x.UpdateDate = time.Time.String(time.Now())
@@ -87,14 +84,10 @@ func InsertGawean(c *gin.Context) {
 func UpdateGawean(c *gin.Context) {
 	var x structs.Gawean
 	err := c.ShouldBindJSON(&x)
-	if err != nil {
-		panic(err)
-	}
+	CheckErr(err)
 	err = repository.UpdateGawean(database.DbConnection, x, c)
 
-	if err != nil {
-		panic(err)
-	}
+	CheckErr(err)
 
 	c.JSON(http.StatusOK, gin.H{
 		"result": "Success Update Gawean",
@@ -109,9 +102,7 @@ func DeleteGawean(c *gin.Context) {
 
 	err = repository.DeleteGawean(database.DbConnection, x)
 
-	if err != nil {
-		panic(err)
-	}
+	CheckErr(err)
 
 	c.JSON(http.StatusOK, gin.H{
 		"result": "Success Delete Gawean",

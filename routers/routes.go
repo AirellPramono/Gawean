@@ -9,6 +9,8 @@ import (
 
 func StartServer() *gin.Engine {
 	router := gin.Default()
+	router.POST("/register", controllers.RegisterUser)
+
 	clients := router.Group("/clients")
 	clients.GET("", middleware.BasicAuth, controllers.GetAllClients)
 	clients.GET("/:id", middleware.BasicAuth, controllers.GetClient)

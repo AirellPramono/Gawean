@@ -1,17 +1,43 @@
 package middleware
 
 import (
+	"Gawean/database"
+	. "Gawean/helper"
+	"Gawean/structs"
+	"database/sql"
 	"log"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
 )
 
+func Authenticated(db *sql.DB, c *gin.Context) (auth bool) {
+	auth = false
+	un, pw, ok := c.Request.BasicAuth()
+
+	sql := `SELECT *FROM Users`
+
+	rows, err := db.Query(sql)
+	CheckErr(err)
+	defer rows.Close()
+
+	for rows.Next() {
+		var x = structs.User{}
+
+		err = rows.Scan(&x.Username, &x.Password)
+		CheckErr(err)
+		if ok && un == x.Username && pw == x.Password {
+			auth = true
+			return
+		}
+
+	}
+	return
+
+}
+
 func BasicAuth(ctx *gin.Context) {
-	un, pw, auth := ctx.Request.BasicAuth()
-	if auth && un == "Arif" && pw == "Bugaresa" {
-		log.Println("Authenticated")
-	} else if auth && un == "Saya" && pw == "Ganteng" {
+	if Authenticated(database.DbConnection, ctx) {
 		log.Println("Authenticated")
 	} else {
 		log.Println("Fail Authentication")

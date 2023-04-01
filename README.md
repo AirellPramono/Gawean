@@ -7,22 +7,28 @@ Tentunya para penyedia jasa, contohnya dokter umum, tukang rawat taman, tukang s
 Gawean dapat membantu proses-proses ini, mendatakan informasi-informasi yang bejibun atau bertaburan, dan meningkatkan kinerja serta akurasi para penyedia servis tersebut. Gawean menyediakan cara untuk mendata detail klien, alamat klien terkait, kategori servis, dan gawean atau urusan yang terkait dengan klien tersebut.
 
 
-Use BasicAuth with username Arif & password Bugaresa or username Saya & password Ganteng
+Use BasicAuth
 
 
 ROUTES
+
+/register
+
+POST / = Register a user using json format "username":"fill_here" and "password":"fill_here". Only registered user can use services below by putting the credentials on Basic Auth. 
+
+Already registered user Airell => Pramono and Arif => Bugaresa
 
 
 /clients 
 
 
-GET /= Get all clients data
+GET / = Get all clients data
 
 GET /:id = Get specific client by ID
 
 GET /city/:id = Get specific client by which city he lives
 
-POST /= Basic posting of 1 client data using JSON format
+POST / = Basic posting of 1 client data using JSON format
 
 PUT /:id = Update client data by ID
 
