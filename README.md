@@ -7,14 +7,14 @@ Tentunya para penyedia jasa, contohnya dokter umum, tukang rawat taman, tukang s
 Gawean dapat membantu proses-proses ini, mendatakan informasi-informasi yang bejibun atau bertaburan, dan meningkatkan kinerja serta akurasi para penyedia servis tersebut. Gawean menyediakan cara untuk mendata detail klien, alamat klien terkait, kategori servis, dan gawean atau urusan yang terkait dengan klien tersebut.
 
 
-Use BasicAuth
+Use BasicAuth in POSTMAN 
 
 
 ROUTES
 
 /register
 
-POST / = Register a user using json format "username":"fill_here" and "password":"fill_here". Only registered user can use services below by putting the credentials on Basic Auth. 
+POST / = Register a user using json format "username":"fill_here" and "password":"fill_here". Only registered user can use services below by putting the credentials on Basic Auth (HTTP) in POSTMAN
 
 Already registered user Airell => Pramono and Arif => Bugaresa
 
